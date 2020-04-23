@@ -1,0 +1,29 @@
+.card{
+    margin: 25px;
+    border: 5px #008080 double;
+    width: 280px;
+    height: 300px;
+    padding: 12px;
+    border-radius: 25%;
+    text-align: center;
+    background-color: antiquewhite;
+    color:gray;
+    font-size: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    float: left;
+}
+
+.card:hover{
+    transform: scale(1.2);
+    box-shadow: 2px 2px 2px gray;
+    z-index: 1;
+}
+
+label{
+    font-weight: bold;
+    text-decoration:  underline;
+}
+
+.row {
+    margin: 0 -5px;
+}

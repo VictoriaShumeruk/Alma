@@ -1,22 +1,13 @@
 .form{
     border: 20px solid pink;
-    margin: 160px;
+    margin: 50px 100px 30px 100px;
     width: 40%;
     display: inline-block;
     padding: 30px;
     float: right;    
 }
-
+    
 input,select,option{
-    text-align: right;
-    padding: 12px;
-    margin:12px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width:60%;
-}
-
-.s{
     text-align: right;
     padding: 12px;
     margin:12px;
@@ -29,6 +20,8 @@ label{
     display: inline-block;
     width:32%;
     text-align: right;
+    font-size: 15px;
+    font-weight: lighter;
     
 }
 h2{
@@ -41,15 +34,40 @@ h2{
     float:right;
 }
 
-alert{
-     text-align: right;
-}
-
-alert alert-danger{
-     text-align: right;
-    float:right;
+.alert{
+    text-align: center;
 }
 
 .button{
-    
+    border: 2px solid pink;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    float:left;
+    margin-left: 25px;
+}
+
+.button:hover{
+    background-color: white;
+}
+
+.reg{
+    clear: both;
+    display: block;
+    color: red;
+}
+
+.reg input{
+    border: 2px solid pink;
+    border-radius: 10px;
+    width: 15%;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+
+.reg input:hover{
+    background-color: white;
 }
