@@ -47,7 +47,7 @@
                     <label for="name">שם פרטי ומשפחה
                     <input type="text" id="name" name="fullname" value="<?php echo $reservation['fullname']; ?>"></label><br></fieldset>
 <!--                    <div><?php echo $error['fullname'];?> </div>-->
-                    <input type="submit" name="submit" id="edit" value="שמור שינויים">
+                        <button type="submit" id="edit" value="שמור שינויים"></button>
                     
         <?php echo form_close();?>
 

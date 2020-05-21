@@ -15,17 +15,30 @@ function terrace(){
     document.getElementById('tableTr').style.display = "block";
 }
    
-function openNav(){
+function createOpen(){
   document.getElementById("createRes").style.width = "350px";
   document.getElementById("map").style.marginRight = "350px";
   document.getElementById("map").style.width = "60%";
 }
+function editOpen() {
+  document.getElementById("editRes").style.width = "350px";
+  document.getElementById("map").style.marginRight = "350px";
+  document.getElementById("map").style.width = "60%";
+}
 function closeNav() {
-  document.getElementById("createRes").style.width = "0";
+  document.getElementById("editRes").style.width = "0px";
+  document.getElementById("createRes").style.width = "0px";
   document.getElementById("map").style.marginRight= "0";
   document.getElementById("map").style.width = "70%";
 }
-
+function errorDiv() {
+  var x = document.getElementById("error_div");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 function change_tnum(x){
     
     $('#tnum1').hide();
@@ -34,12 +47,15 @@ function change_tnum(x){
     switch ($('#loc').val()) { // show whichever option is appropriate
       case 'פנים':
         $('#tnum1').show();
+        inside();
         break;
       case 'חוץ':
         $('#tnum2').show();
+        outside();
         break;
       case 'טרסה':
         $('#tnum3').show();
+        terrace();
         break;
       default:
         break;
@@ -98,8 +114,9 @@ function change_tnum(x){
 //});
     
     
- $("#form_insert").click(function () {
-            
+ $("#save").click(function (e) { 
+     
+        e.preventDefault(); 
         var tnum1 = $("#tnum1").val();
         var tnum2 = $("#tnum2").val();
         var tnum3 = $("#tnum3").val();
@@ -108,25 +125,29 @@ function change_tnum(x){
         var date = $("#date").val();
         var time = $("#time").val();
         var phone = $("#phone").val();
-        var fullname = $("#fullname").val();
+        var fullname = $("#name").val();
             $.ajax({
                 type: 'POST',
-                url: "<?php echo site_url(); ?>" + "/hosting/tableMap",
+                dataType: 'json',
+                url: "<?php echo site_url(); ?>" + "/hosting/create",
                 data: {tnum1:tnum1, tnum2:tnum2, tnum3:tnum3, loc:loc, dine:dine, 
                 date:date, time:time, phone:phone, fullname: fullname},
                 error: function () {
-                    alert( "Load was performed." );
+                    alert( "Load was performed.");
                 },
                 success: function (data) {
-                    if (data === "") {
+                    if (data.error === 0) {
                         alert("ההרשמה בוצעה בהצלחה");
-                        window.location.href = "<?php echo site_url('Login/login'); ?>";
+                        window.location.href = "<?php echo site_url('hosting/tableMap'); ?>";
                     }
                     else {
-                        $("#error").html(data);
+                        
+                        alert("ההזמנה לא התקבלה!")
+                        $("#error_div").html('validation_error');
                     }
                 }
             });
     });
+
             
   

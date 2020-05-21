@@ -23,6 +23,7 @@ class Hosting extends CI_Controller {
          $current_date = date('Y-m-d');
             $data['tables'] = $this->Hosting_model->get_tables($current_date);
               }
+              
             $this->load->view('templates/header');
             $this->load->view('hosting/tableMap', $data);
             $this->load->view('templates/footer');
@@ -103,7 +104,7 @@ class Hosting extends CI_Controller {
     }
     
     public function edit_reservation() {
-  
+   print_r($this->db->last_query());
         $data['reservation'] = $this->Hosting_model->get_res_by_id($this->session->flashdata('reservation_id'));
         $this->load->view('templates/header');
         $this->load->view('Hosting/edit_reservation', $data);
@@ -111,23 +112,16 @@ class Hosting extends CI_Controller {
     }
     
     public function edit() {
-//        $newDate = date("Y-m-d",strtotime($this->input->post('re_date')));
-//        $newTime = date("H:i", strtotime($this->input->post('re_time')));
-//        $data = array(
-//            'num' => $this->input->post('num'),
-//            'location' => $this->input->post('location'),
-//            'diners' => $this->input->post('diners'),
-//            're_date' => $newDate,
-//            're_time' => $newTime,
-//            'phonenumber' => $this->input->post('phonenumber'),
-//        );
+      
 ////                    
 //
 //        $dataclient = array(
 //            'fullname' => $this->input->post('fullname'),
 //            'phonenumber' => $this->input->post('phonenumber'),
 //        );
-        echo $id = $this->session->flashdata('reservation_id');
+//        $this->output->enable_profiler(TRUE);
+         
+        $id = $this->session->flashdata('reservation_id');
         $this->Hosting_model->update_res($id);
         redirect(base_url("/hosting/tableMap"));
     
@@ -135,5 +129,6 @@ class Hosting extends CI_Controller {
 //    public function getClientNameByNumber(){
 //        
 //    }
-}          
+}  
+
 ?>
