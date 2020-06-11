@@ -1,0 +1,46 @@
+h1{
+    color: gray;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.warp{
+    margin-right: 20px;
+}
+
+.details{
+    display:inline-block;
+    margin-right: 20px;
+    font-size:20px;
+    color:gray;
+    white-space:nowrap;
+    position: absolute;
+    
+}
+
+#m:hover{
+   transform: scale(1);
+}
+
+.searchWrraper{
+    color: gray;
+    font-size:30px;
+    border-radius: 25px;
+}
+
+button{
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+input{
+    border-radius: 25px;
+    
+}
+
+button:hover{
+    opacity: 0.6;
+}
+
+
+
