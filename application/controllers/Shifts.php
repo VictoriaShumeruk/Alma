@@ -154,7 +154,6 @@ class Shifts extends CI_Controller {
                 );
             }
         }
-        echo '<pre>';print_r($data); die;    
 
         $error = $this->checkShifts_manager($data); 
         
@@ -174,25 +173,15 @@ class Shifts extends CI_Controller {
         $i =0;
         $ex_date = $this->Shifts_model->get_ex_date();
         $count = count($data);
-//        $jobs = Array("מלצרות","בר","אירוח","אחמש");
-//        $jobs2 = $this->Shifts_model->get_jobs();
-//        $workers_by_job = $this->Shifts_model->get_jobs();
-//            "מלצרות" => array()
-//            "בר" =>
-//            "אירוח" =>
-//            "אחמש" =>
-//        
-//        )
-        
+
         foreach ($ex_date as $date):
             if(in_array($data[0]['date'],$ex_date[$i])){
                  $error.='<br> סידור לשבוע זה כבר קיים במערכת';
             }
             $i++;
         endforeach;
-        
-        
-        if (($count >= 56)){ 
+                
+        if (($count >= 66)){ 
                 
             for($j=0;$j<count($jobs);$j++){
                 $counter =0;
