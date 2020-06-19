@@ -1,7 +1,7 @@
 h1{
     color: gray;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 4vw;
 }
 
 .warp{
@@ -11,20 +11,29 @@ h1{
 .details{
     display:inline-block;
     margin-right: 20px;
-    font-size:20px;
+    font-size:1.5vw;
     color:gray;
     white-space:nowrap;
     position: absolute;
     
 }
 
+#p{
+    height: 8%;
+    width: 8%;
+}
+
+#m{
+    height: 5%;
+    width: 5%;
+}
 #m:hover{
    transform: scale(1);
 }
 
 .searchWrraper{
     color: gray;
-    font-size:30px;
+    font-size:2vw;
     border-radius: 25px;
 }
 
