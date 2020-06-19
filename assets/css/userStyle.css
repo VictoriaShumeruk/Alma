@@ -1,16 +1,16 @@
 .card{
     margin: 25px;
     border: 5px #008080 double;
-    width: 280px;
-    height: 300px;
-    padding: 12px;
+    width: 25%;
+    height: 25%;
+    padding: 20px;
     border-radius: 25%;
     text-align: center;
     background-color: antiquewhite;
     color:gray;
-    font-size: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    float: left;
+    font-size: 1vw;
+    box-shadow:  0 6px 10px 0 rgba( 0.4,  0.4,  0.4, 0.4), 0 6px 30px 0 rgba(0.30, 0.30,0.30, 0.30);
+    float: right;
 }
 
 .card:hover{
@@ -26,4 +26,141 @@ label{
 
 .row {
     margin: 0 -5px;
+    display: block;
+    float: right;
+    clear: both;
+    width: 85%;
 }
+
+#edit_row {
+    display: none;
+}
+
+.open-button{
+  background-color: #008080;
+  border: 5px antiquewhite double;
+  color: antiquewhite;
+  padding: 16px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 280px; 
+  opacity: 1;
+  margin: 25px;
+}
+
+.open-button a {
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+.open-button:hover{
+    opacity: 0.6;
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+.edit_card{
+    height: 500px;
+    transform: none;
+    padding-top: 30px;
+    float: right;
+}
+
+.edit_card input,select{
+    width: 55%;
+}
+
+.edit_card label{
+    width: 35%;
+    text-align: right;
+}
+
+.edit_card .open-button{
+    margin: 10px;
+    width: 35%;
+    height: 55px;
+}
+
+.alert{
+    margin: 25px;
+    width: 62%;
+    font-size: 1vw;
+}
+
+@media (max-width: 425px) {
+    
+    .card{
+        width: 35%;
+        height: 35%;
+        float: right;
+        padding: 5px;
+        margin:15px;
+    }
+    
+    
+    h2{
+        font-size: 2.5vw;
+    }
+        
+    p{
+        font-size: 1.2vw;
+        margin: 0px;
+    }
+
+    .row{
+        width: 100%;
+    }
+    
+    .open-button{
+        width: 40%;
+        font-size: 2vw;
+        margin: 5px;
+    }
+    
+    .edit_card .open-button {
+        width: 35%;
+        height: 25px;
+        padding: 2px;  
+         margin: 2px;
+    }
+    
+    .edit_card{
+        padding-top: 20px;
+        height: 20  0px;
+        width: 150px;
+        height: 200px;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 991.98px) { 
+    
+     .card{
+        width: 25%;
+        height: 25%;
+        float: right;
+        padding: 5px;
+        margin:15px;
+    }
+    
+    .edit_card{
+        height: 40%;
+        padding-top: 25px;
+    }
+    
+    h2{
+        font-size: 2.5vw;
+    }
+    
+     p{
+        font-size: 1.2vw;
+        margin: 0px;
+    }
+    
+      .row{
+        width: 100%;
+    }
+}
+
+
+    
+  

@@ -1,10 +1,13 @@
 .form{
     border: 20px solid pink;
-    margin: 50px 100px 30px 100px;
-    width: 40%;
+    border-radius: 25px;
+    margin: 0px 50px 30px 50px;
+    width: 500px;
     display: inline-block;
     padding: 30px;
-    float: right;    
+    float: right;   
+    box-shadow:  0 6px 10px 0 rgba( 0.4,  0.4,  0.4, 0.4), 0 6px 30px 0 rgba(0.30, 0.30,0.30, 0.30);
+
 }
     
 input,select,option{
@@ -14,6 +17,7 @@ input,select,option{
     border: 1px solid #ccc;
     border-radius: 3px;
     width:60%;
+    border-radius: 25px;
 }
 
 label{
@@ -40,17 +44,18 @@ h2{
 
 .button{
     border: 2px solid pink;
-    border-radius: 10px;
-    width: 20%;
+    border-radius: 25px;
+    width: 30%;
     text-align: center;
     font-weight: bold;
     font-size: 20px;
     float:left;
     margin-left: 25px;
+    opacity: 1;    
 }
 
 .button:hover{
-    background-color: white;
+    opacity: 0.6;
 }
 
 .reg{
@@ -62,12 +67,36 @@ h2{
 .reg input{
     border: 2px solid pink;
     border-radius: 10px;
-    width: 15%;
-    text-align: center;
+    width: 18%;
     font-weight: bold;
     color: black;
+    border-radius: 25px;  
 }
 
 .reg input:hover{
-    background-color: white;
+   opacity: 0.6;
+}
+
+
+@media (max-width: 575.98px) {
+    .form{
+        width: 200px;
+    }
+    
+    label{
+        width: 100%;
+        font-size: 10px;
+        text-align: center;
+    }
+    
+    input,select,option{
+        width: 100%;
+        font-size: 10px;
+    }
+    
+    .button, .reg input, .reg{
+        width: 75%;
+        font-size: 10px;
+        margin: auto;
+    }
 }
