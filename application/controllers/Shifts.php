@@ -25,7 +25,6 @@ class Shifts extends CI_Controller {
     }
     
     public function viewShifts() { 
-//        $data['title'] = 'סידור משמרות עבור שבוע:';
         if(($this->session->flashdata('s_date')) != NULL){
             $this->session->keep_flashdata('week');   
             $date = $this->session->flashdata('s_date');
@@ -56,46 +55,13 @@ class Shifts extends CI_Controller {
         $data['friday_evening'] = $this->Shifts_model->view_Shifts('שישי','ערב',$date);
         $data['saturday_morning'] = $this->Shifts_model->view_Shifts('שבת','בוקר',$date);
         $data['saturday_evening'] = $this->Shifts_model->view_Shifts('שבת','ערב',$date);
-//                $data['hi'] = date('Y-m-d', strtotime("20-05-10"));
-                        
-//        $hi = date('Y-m-d', strtotime("20-05-17"));
-//        $data['shifts_border'] = $this->Shifts_model->get_shifts_by_week($hi);
-//        $check = $this->input->post('worker_name[]');
-//        $da = date("17-05-20");
-//        $by=$this->Shifts_model->get_shifts_by_week($da);
-//        $hi = $this->Shifts_model->shifts_form_input($date);
-//        redirect('shifts/viewShifts');
-//        echo '<pre>';print_r($by); die;   
-        
-//        $this->Shifts_model->update_shifts($hi);
 
         $this->load->view('templates/header');
         $this->load->view('shifts/viewShifts', $data);
         $this->load->view('templates/footer');
     } 
-        
-//        public function update_shifts(){
-//            
-//            $hi = date('Y-m-d', strtotime("20-05-17"));       
-////            $data['shifts_border'] = $this->Shifts_model->get_shifts_by_week($hi);
-//            $this->Shifts_model->update_shifts($hi);
-            
-//            $this->viewShifts();
-//
-//              $date = date("17-05-2020");
-//                    
-//            $data['shifts_border'] = $this->Shifts_model->get_shifts_by_week($date);
-//            $hi = $this->Shifts_model->shifts_form_input();
-//           echo '<pre>';print_r($hi); die;   
-//             $this->load->view('shifts/manageShifts', $data);
-            
-//            redirect('shifts/manageShifts');
-//            $check = $this->input->post('worker_name[]');
-//            echo $check;
-//        }
       
     public function manageShifts() { 
-//        $data['title'] = 'סידור עבודה';
         $year = date('Y');
         $week = date('W')+1;
         $weekTime = $year.'-W'.$week;
@@ -106,8 +72,6 @@ class Shifts extends CI_Controller {
         $this->session->keep_flashdata('sunday',$date);
         
         $data['calArray'] = $this->Shifts_model->holidaysAPI();
-//        $data['both'] = $this->Shifts_model->get_both();
-        
       
         $data['sunday_morning'] = $this->Shifts_model->get_shifts('ראשון','בוקר');
         $data['sunday_evening'] = $this->Shifts_model->get_shifts('ראשון','ערב');
@@ -190,7 +154,7 @@ class Shifts extends CI_Controller {
                 );
             }
         }
-//        echo '<pre>';print_r($data); die;    
+        echo '<pre>';print_r($data); die;    
 
         $error = $this->checkShifts_manager($data); 
         
@@ -253,7 +217,6 @@ class Shifts extends CI_Controller {
     }
     
      public function sendShifts() { 
-//        $data['title'] = 'סידור עבודה';
         $year = date('Y');
         $week = date('W')+1;
         $weekTime = $year.'-W'.$week;
@@ -285,7 +248,7 @@ class Shifts extends CI_Controller {
                 'time' => $times[$key],
                 );
         }
-//        echo $data;
+
         $cur_worker = $this->Shifts_model->get_worker();
         $error = $this->checkShifts($cur_worker,$data);
        

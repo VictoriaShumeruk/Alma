@@ -44,7 +44,7 @@ class User extends CI_Controller {
         }else{
             $data['error'] = "<div class='alert alert-danger'><b>המשתמש אינו קיים במערכת</b></div>";
         } 
-        $this->load->view('User/login', $data);
+        $this->load->view('user/login', $data);
         $this->load->view('templates/footer');   
     }   
    
