@@ -14,11 +14,11 @@ class Shifts_model extends CI_Model{
         return $error; 
     }
     
-    public function get_workers(){
-        $sql ="SELECT * FROM user";
-        $result=$this->db->query($sql);
-        return $result->result_array();
-    }
+//    public function get_workers(){
+//        $sql ="SELECT * FROM user";
+//        $result=$this->db->query($sql);
+//        return $result->result_array();
+//    }
     
     public function get_worker(){
         $sql ="SELECT DISTINCT user_id FROM shifts WHERE user_id";
@@ -80,17 +80,6 @@ class Shifts_model extends CI_Model{
         return $query->result_array();
     }
     
-    public function get_both(){
-        $this->db->select('user.fullname');
-        $this->db->from('shifts');
-        $this->db->join('user', 'shifts.user_id = user.id', 'left');
-//        $this->db->where('day', $day);
-        $this->db->where('time', 'בוקר/ערב');
-        $query = $this->db->get();
-       
-        return $query->result_array();
-    }
-
     public function get_Shifts($day,$time){
         $this->db->select('user.fullname');
         $this->db->select('user.job');
@@ -106,11 +95,6 @@ class Shifts_model extends CI_Model{
         $this->db->where('day', $day);
         $this->db->where('time', 'כפולה');
         $this->db->group_end();
-//        $this->db->or_group_start();
-//        $this->db->where('day', $day);
-//        $this->db->where('time', 'בוקר/ערב');
-//        $this->db->group_end();
-
         $query = $this->db->get();
        
         return $query->result_array();
@@ -129,14 +113,7 @@ class Shifts_model extends CI_Model{
         return $query->result_array();
     }
     
-//    public function get_jobs(){
-//        $this->db->select('job');
-//        $this->db->from('user');
-//        $this->db->where('worker_name')
-//        
-//    }
-
-        public function check_exist($field, $variable){
+    public function check_exist($field, $variable){
         if($variable){
            $this->db->where($field, $variable); 
            $query = $this->db->get('shifts');
@@ -167,92 +144,5 @@ class Shifts_model extends CI_Model{
         $result = $query->result();
         return $result;
     }
-    
-//    public function shifts_form_input(){
-//        $data = array();
-//        $dates = date('Y-m-d', strtotime("20-05-17"));
-//        $dates = array_fill(0, 14,$this->input->post('date[]') );
-//        $days = $this->input->post('day[]');
-//        $times = $this->input->post('time[]');
-//        $worker_names = $this->input->post('worker_name[]');
-//        
-//        if(is_array($days)){
-//        foreach ($days as $key => $day){
-//            $data[] =  array (
-//                'day' => $day,
-//                'time' => $times[$key],
-//                'worker_name' => $worker_names[$key],
-//                );
-//            };
-//        }
-//        
-//        foreach ($data as $worker):
-//       
-//        $dates = array_fill(0, 14, $date);
-//        $worker_names = $this->input->post('worker_name[]');
-//        foreach ($dates as $key => $date):
-//        $data[] = array(
-//            'date' => $date,
-//            'worker_name' => $worker_names[$key],
-//        );   
-//        endforeach;
-        
-//        return $data;
-        
-//    }
-//    
-//    public function update_shifts($date){
-//            $worker_name= $this->input->post('worker_name[]');
-//            $this->db->set('worker_name', $worker_name);
-//            $this->db->where('date', $date);
-//            $this->db->update('final_shifts');
-        
-//        $worker_name= $this->input->post('worker_name[]');
-//        $this->db->set('worker_name', $worker_name);
-//        $this->db->where('date', $date);
-//        $this->db->where('day', $this->input->post('day[]'));
-//        $this->db->where('time', $this->input->post('time[]'));
-//        $this->db->update('final_shifts');
-//        
-//        $query = $this->db->get();
-//       
-//        return $query->result_array();
-//    }
-       
-        
-        
-//        $data = array();
-//        $dates = date('Y-m-d', strtotime("20-05-17"));
-////        $dates = array_fill(0, 14, $date );
-//        $days = $this->input->post('day[]');
-//        $times = $this->input->post('time[]');
-//        $worker_names = $this->input->post('worker_name[]');
-//        
-//        if(is_array($dates)){
-//        foreach ($dates as $key => $date){
-//            $data[] =  array (
-//                'date' => $date,
-//                'day' => $days[$key],
-//                'time' => $times[$key],
-//                'worker_name' => $worker_names[$key],
-//                );
-//            };
-//        }
-//        $data = $this->shifts_form_input();
-//       $data['worker_name'] = $this->input->post('worker_name[]');
-        
-//        $worker_name = $this->input->post('worker_name[]');
-//        $sql = "UPDATE $final_shifts SET $worker_name WHERE $date = 'date'";
-//        $this->db->update('final_shifts');
-//        $this->db->set('worker_name');
-//        $this->db->where('date', $date);
-//        $sql = "UPDATE `final_shifts` SET `worker_name` = 'ויקטוריה ' WHERE `final_shifts`.`date` = '2020-05-17' AND `final_shifts`.`worker_name` = '' AND `final_shifts`.`day` = 'שני' AND `final_shifts`.`time` = 'ערב'";
-        
-//        $this->db->set
-        
-        
-        
-//    }
-//    
 }
 ?>

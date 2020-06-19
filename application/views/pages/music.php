@@ -3,8 +3,8 @@
 <script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/assets/js/deezerApi.js"></script>
 
-    <div class="container">
-        <h1> הפלייליסטים של עלמא<img src="<?php echo base_url();?>/assets/images/music.jpg" height="60" width="60" id="m"></h1>
+    <div class="warp container-{breakpoint}">
+        <h1> הפלייליסטים של עלמא<img src="<?php echo base_url();?>/assets/images/music.jpg"  id="m"></h1>
         <button class="searchWrraper" onclick="login();"> לחץ על מנת להתחבר למערכת השמע  </button>
          <!--3by@wHRExTS_tPw-->
          <!--nitzan1040@gmail.com-->
@@ -30,7 +30,7 @@
             for($i=0;$i<=count($response);$i++){
                 echo '<div class="playlist">';
                 $pic=($response["data"][$i]['picture']);
-                echo '<img src='.$pic.'>';
+                echo '<img src='.$pic.' id="p">';
                 echo '<div class=details>';
                 echo 'מספר מזהה:'.' ';
                 print_r ($response["data"][$i]['id']);
@@ -78,7 +78,7 @@
             });
         </script>
     
-        <div class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=400&height=350&color=ff0000&layout=ligth&size=medium&type=playlist&id=<?php if (isset($num)){echo $num;} else{echo '7627359582';} ?>&app_id=412902" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="500" data-height="300"></div>
+        <div class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=400&height=350&color=ff0000&layout=ligth&size=medium&type=playlist&id=<?php if (isset($num)){echo $num;} else{echo '7627359582';} ?>&app_id=412902" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="40%" data-height="400"></div>
 
         <script>
             (function() {

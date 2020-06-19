@@ -1,8 +1,6 @@
     <footer> 
-        <!--<div class="row">-->
-            <img id='c' src="<?php echo base_url();?>assets/images/clock.jpg" height="42" width="42">
+        <img class="clockLogo" id="img" src="<?php echo base_url();?>assets/images/clock.jpg">
             <div id='clock'> <script src="<?php echo base_url();?>assets/js/clock.js"></script></div>
-        <!--</div>-->
     </footer>
 </body>
 </html>

@@ -6,17 +6,16 @@ class User_model extends CI_Model {
         $this->load->database();
     }
 
-    
-    
     public function auth($data) {
         $sql ="SELECT * FROM user WHERE id='".$data['id']."'";
+        
         $query=$this->db->query($sql);
         if ($query) {
             $query = $query->row_array();
-//            if (password_verify($data['password'], $query['password'])){
+            if (password_verify($data['password'], $query['password'])){
                 return $query;
             }
-//        }
+        }
     }
 
     public function save($data) {
@@ -54,7 +53,7 @@ class User_model extends CI_Model {
         return $result;
     }
     
-      public function user_form_input(){
+    public function user_form_input(){
         $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
         $data = array(
             'fullname' => $this->input->post('fullname'),

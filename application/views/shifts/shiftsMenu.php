@@ -1,7 +1,7 @@
 <main>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/shiftsStyle.css"/>
 
-<div class="container">
+<div class="container-{breakpoint}">
     <div class="row">
         <?php if(($_SESSION['role']=='מנהל')){?>           
         <div class=box><a href="<?php echo site_url().'shifts/manageShifts'?>">

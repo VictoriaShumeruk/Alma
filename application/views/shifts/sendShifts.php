@@ -4,17 +4,11 @@
 <div class="container">
 <?php if($this->session->flashdata('error')){?>
     <div class="alert alert-danger">
-        <!--<a href="<?php echo site_url().'pages/index'?>" class="close" data-dismiss="alert" aria-label="close">×</a>-->
         <?php echo $this->session->flashdata('error'); ?>
-        <!--<a href="<?php echo site_url().'pages/index'?>" class='alert-link'> לחזרה לדף בית לחץ כאן</a>-->
-
     </div>
 <?php } ?>
 <?php if ($this->session->flashdata('success')) { ?>
     <div class="alert alert-success">
-        <!--<a href="<?php echo site_url().'pages/index'?>" class="close" data-dismiss="alert" aria-label="close">×</a>-->
-        <!--<a href=". site_url().'pages/index'" class='alert-link'> לחזרה לדף בית לחץ כאן</a>-->
-      <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
         <strong><?php echo $this->session->flashdata('success'); ?></strong>
     </div>
 <?php } ?>
@@ -28,7 +22,7 @@
         $monday=$time->modify('+1 day');
         $dates[$i] = $time->format('d-m-Y'); 
 }?>
-<table>
+    <table class="send">
     <tr>
         <th id="1">יום ראשון
             <p><?php echo date("d/m", strtotime($dates[0]));
@@ -114,15 +108,7 @@
             ?><script><?php if($saturdayfreeDay ==true){?> document.getElementById("7").style.background="MediumAquaMarine"; <?php }?></script>
             </p>
         </th>
-<!--        <th>יום ראשון</th>
-        <th>יום שני</th>
-        <th>יום שלישי</th>
-        <th>יום רביעי</th>
-        <th>יום חמישי</th>
-        <th>יום שישי</th>
-        <th>יום שבת</th>        -->
     </tr>
-    
     <tr>
         <td> 
             <input type="hidden" value="ראשון" name="day[]">
@@ -130,7 +116,6 @@
                 <option disabled selected value=""> בחר משמרת</option>
                 <option value="בוקר">בוקר</option>
                 <option value="ערב">ערב</option>
-                <option value="בוקר/ערב">בוקר/ערב</option>
                 <option value="כפולה">כפולה</option>
                 <option value="חופש">חופש</option>         
             </select>
@@ -142,7 +127,6 @@
                 <option disabled selected value=""> בחר משמרת</option>
                 <option value="בוקר">בוקר</option>
                 <option value="ערב">ערב</option>
-                <option value="בוקר/ערב">בוקר/ערב</option>
                 <option value="כפולה">כפולה</option>
                 <option value="חופש">חופש</option>
             </select>

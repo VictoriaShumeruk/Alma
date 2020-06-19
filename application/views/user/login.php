@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/formStyle.css"/>
 <main>
-<div class="container">
-        <div class="col-md-5 form"> 
+<div class="container-{breakpoint}">
+        <div class="form"> 
             <p id="error">
                 <?php
                 if (isset($error)) {
@@ -18,7 +18,7 @@
             <input class="button" id="submit" type="submit" value="התחברות" name="submit">
 
             <div class="reg"> עובד חדש ? לחץ להירשם למערכת :) 
-                <input id="register" type="button" value="הרשמה" name="register" onclick="window.location = '<?php echo site_url(); ?>/User/register'">
+                <input type="button" value="הרשמה" name="register" onclick="window.location = '<?php echo site_url(); ?>/User/register'">
            </div>
         </div>
     </div>

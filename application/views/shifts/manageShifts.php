@@ -6,8 +6,7 @@
 
     <?php if($this->session->flashdata('error')){?>
         <div class="alert alert-danger">
-            <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>-->
-                <?php echo $this->session->flashdata('error'); ?>
+            <?php echo $this->session->flashdata('error'); ?>
         </div>
     <?php } ?>
     <?php if ($this->session->flashdata('success')) { ?>
@@ -22,6 +21,39 @@
             <strong><?php echo $this->session->flashdata('warning'); ?></strong><br>            
         </div>
     <?php } ?>
+    <script>
+//        function countChecked(){
+//        var times = {};
+//        var n;
+//        function hi(){
+//            return times;
+//        };
+//        var countChecked = function() {
+//        var times = {};
+//        return times;
+//    };
+
+//        n = $( '.'+ this.className + ':checked' ).length;
+//        times[this.className] = n;
+//            console.log(times);
+//            alert( n + (n === 1 ? " is" : " are") + " checked!" );
+//        alert(times.this.className);
+//        return times;
+//        };
+//        countChecked();
+//        $( "input[type=checkbox]" ).on( "click", countChecked );
+//        return times;
+//        }
+//        var k = countChecked();
+        
+    
+    </script>
+<!--$.ajax({
+  url: "<?php echo site_url(); ?>" + "/Shifts/manageShifts.php",
+  method: "GET",
+  data: { profile_viewer_uid: profile_viewer_uid }
+});
+    </script>-->
     <?php
         $sundayDate=$this->session->flashdata('sunday');
         $dates[0] = date("d-m-Y", strtotime($sundayDate));
@@ -32,11 +64,10 @@
                 $dates[$i] = $time->format('d-m-Y');     
         }
     ?>
-    <?php // var_dump($week_shifts);?>
     <table class="manage">
     <tr>
         <th class="date">           
-            <input type="week" name="week" readonly value="<?php  echo $this->session->flashdata('currentWeek');?>">     
+            <input type="week" name="week" readonly value="<?php echo $this->session->flashdata('currentWeek');?>">     
         </th>
         <th>תפקיד</th>
         <th id="1">יום ראשון
@@ -113,8 +144,6 @@
         </th>
         <th id="7">יום שבת
             <p><?php 
-//            $hi = "2020-09-19";
-//            echo $hi;
              echo date("d/m", strtotime($dates[6])); 
              foreach($calArray['items'] as $holiday){
                     $date = $holiday['date'];              
@@ -130,188 +159,208 @@
     <tr class="waiter">
         <td rowspan="4" style="background-color:lightgrey;"><b>בוקר</b></td>  
         <td>מלצרות</td>
-        <td class="sunday">
+        <td>
             <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
+          
             <?php
-                foreach ($sunday_morning as $shift): 
-                if($shift['job'] == "מלצרות"){?> 
-                <input type="hidden" value="ראשון" name="day[]">
-                <input type="hidden" value="בוקר" name="time[]">           
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
-                <?php echo $shift['fullname']; ?></label>
-                <?php }endforeach; ?>               
+            foreach ($sunday_morning as $shift): 
+            if($shift['job'] == "מלצרות"){?> 
+            <input type="hidden" value="ראשון" name="day[]">
+            <input type="hidden" value="בוקר" name="time[]">        
+            <br><label><input class="sundayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <?php echo $shift['fullname']; ?></label>               
+            <?php }endforeach; ?>         
         </td>
-        <td class="monday">               
+        <td>               
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>  
-            <?php  endforeach;  ?>               
+            <?php  endforeach;  ?>     
+            
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
             <input type="hidden" value="שלישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="tuesdayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                  
             <?php  endforeach;  ?>              
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; } ?></label>                  
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
              <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
              <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>
         </td>
         <td>
            <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_morning as $shift):?>
             <?php if($shift['job'] == "מלצרות"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">              
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayMorWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];} ?></label>                  
             <?php  endforeach;  ?>               
         </td>
     </tr>
     <tr class="bar">
         <td>בר</td>
-        <td class="sunday">
+        <td>
             <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($sunday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="ראשון" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">           
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="sundayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>"  >
             <?php echo $shift['fullname']; }?></label>
             <?php endforeach;?>               
         </td>
         <td>               
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>"  />
             <?php echo $shift['fullname']; }?></label>  
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
-            <input type="hidden" value="שלישי" name="day[]">
-            <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>"/>
-            <?php echo $shift['fullname']; }?></label>                  
+            <br><label><input onClick="hi()" class="tuesdayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>" />
+            <?php echo $shift['fullname']; }?></label>       
             <?php  endforeach;  ?> 
+            <script>hi();</script>
+            <?php 
+            $getValue = "<script>document.write(console.log(Object(times['tuesdayMorBar'])));</script>";
+            echo $getValue;
+//var_dump('<script>document.writeln(p1);</script>');
+//         $count = $_GET["uid"];
+//         $profile_viewer_uid = $_POST['profile_viewer_uid'];
+//         echo json_encode($profile_viewer_uid);
+//         var_dump($profile_viewer_uid);
+            for ($i=0; $i< $getValue ;$i++){
+//               var_dump('<script>$(.tuesdayMorBar:checked ).length; </script>')
+//             for($i=0; $i<print ('<script> times[this.className]</script>');$i++){
+//               print '<script> console.log(times.values(tuesdayMorBar));</script>';
+                 
+                 ?>   
+                <input class="tuesdayMorBar" type="hidden" value="שלישי" name="day[]" >
+                <input class="tuesdayMorBar" type="hidden" value="בוקר" name="time[]" >
+            <?php }?>
+            <!--</div>-->
+            
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; } ?></label>                  
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>
         </td>
         <td>
            <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_morning as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">     
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayMorBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];} ?></label>                  
             <?php  endforeach;  ?>               
         </td>
@@ -320,92 +369,92 @@
         <td>אירוח</td>
         <td>
             <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($sunday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="ראשון" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">           
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="sundayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>
             <?php endforeach;?>               
         </td>
         <td>          
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>  
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שלישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="tuesdayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                  
             <?php  endforeach;  ?>              
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; } ?></label>                  
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
              <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
              <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>
         </td>
         <td>
            <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_morning as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">              
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayMorHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];} ?></label>                  
             <?php  endforeach;  ?>               
         </td>
@@ -414,92 +463,92 @@
         <td>אחמ"ש</td>
         <td>
             <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($sunday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
             <input type="hidden" value="ראשון" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">           
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="sundayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>
             <?php endforeach;?>               
         </td>
         <td>               
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>  
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
             <input type="hidden" value="שלישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="tuesdayyMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                  
             <?php  endforeach;  ?>              
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]"> 
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; } ?></label>                  
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>               
         </td>
         <td>
            <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                 
             <?php  endforeach;  ?>
         </td>
         <td>
            <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_morning as $shift):?>
             <?php if($shift['job'] == "אחמש"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="בוקר" name="time[]">              
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayMorManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];} ?></label>                  
             <?php  endforeach;  ?>               
         </td>
@@ -510,93 +559,93 @@
             <td>מלצרות</td>
             <td>
                <?php if ($sundayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($sunday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="ראשון" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">               
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="sundayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname'];}?></label>                   
                 <?php  endforeach;  ?>              
             </td>
             <td>
                 <?php if ($mondayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($monday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="שני" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="mondayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname'];}?></label>
                 <?php  endforeach;  ?>
             </td>
             <td>
                 <?php if ($tuesdayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($tuesday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="שלישי" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="tuesdayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname']; }?></label>                   
                 <?php  endforeach;  ?>               
             </td>
             <td>
                 <?php if ($wednesdayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($wednesday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="רביעי" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="wednesdayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname']; }?></label>    
                 <?php  endforeach;  ?>
                 
             </td>
             <td>
                 <?php if ($thursdayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($thursday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="חמישי" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="thursdayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname'];}?></label>                   
                 <?php  endforeach;  ?>               
             </td>
             <td>
                 <?php if ($fridayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($friday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="שישי" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="fridayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname'];}?></label>                   
                 <?php  endforeach;  ?>               
             </td>
             <td>
                 <?php if ($saturdayfreeDay === true){
-                echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+                echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
                 }?>
                 <?php
                 foreach ($saturday_evening as $shift):?>
                 <?php if($shift['job'] == "מלצרות"){?>
                 <input type="hidden" value="שבת" name="day[]">
                 <input type="hidden" value="ערב" name="time[]">
-                <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+                <br><label><input class="saturdayEveWaiter" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
                 <?php echo $shift['fullname'];}?></label>
                 <?php  endforeach;  ?>
             </td>
@@ -605,93 +654,93 @@
         <td>בר</td>
         <td>
            <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($sunday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="ראשון" name="day[]">
             <input type="hidden" value="ערב" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="sundayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>              
         </td>
         <td>
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayEveBar"type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>
             <?php  endforeach;  ?>
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שלישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="tuesdayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>    
             <?php  endforeach;  ?>
 
         </td>
         <td>
             <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_evening as $shift):?>
             <?php if($shift['job'] == "בר"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayEveBar" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>
             <?php  endforeach;  ?>
         </td>
@@ -700,93 +749,93 @@
         <td>אירוח</td>
         <td>
            <?php if ($sundayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($sunday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="ראשון" name="day[]">
             <input type="hidden" value="ערב" name="time[]">               
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="sundayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>              
         </td>
         <td>
             <?php if ($mondayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($monday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שני" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="mondayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>
             <?php  endforeach;  ?>
         </td>
         <td>
             <?php if ($tuesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($tuesday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שלישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="tuesdayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($wednesdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($wednesday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="רביעי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="wednesdayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname']; }?></label>    
             <?php  endforeach;  ?>
 
         </td>
         <td>
             <?php if ($thursdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($thursday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="חמישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="thursdayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($fridayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($friday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שישי" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="fridayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>                   
             <?php  endforeach;  ?>               
         </td>
         <td>
             <?php if ($saturdayfreeDay === true){
-            echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+            echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
             }?>
             <?php
             foreach ($saturday_evening as $shift):?>
             <?php if($shift['job'] == "אירוח"){?>
             <input type="hidden" value="שבת" name="day[]">
             <input type="hidden" value="ערב" name="time[]">
-            <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+            <br><label><input class="saturdayEveHost" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
             <?php echo $shift['fullname'];}?></label>
             <?php  endforeach;  ?>
         </td>
@@ -795,93 +844,93 @@
         <td>אחמ"ש</td>
             <td>
             <?php if ($sundayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($sunday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="ראשון" name="day[]">
              <input type="hidden" value="ערב" name="time[]">               
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="sundayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname'];}?></label>                   
              <?php  endforeach;  ?>              
          </td>
          <td>
              <?php if ($mondayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($monday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="שני" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="mondayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname'];}?></label>
              <?php  endforeach;  ?>
          </td>
          <td>
              <?php if ($tuesdayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($tuesday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="שלישי" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="tuesdayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname']; }?></label>                   
              <?php  endforeach;  ?>               
          </td>
          <td>
              <?php if ($wednesdayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($wednesday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="רביעי" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="wednesdayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname']; }?></label>    
              <?php  endforeach;  ?>
 
          </td>
          <td>
              <?php if ($thursdayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($thursday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="חמישי" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="thursdayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname'];}?></label>                   
              <?php  endforeach;  ?>               
          </td>
          <td>
              <?php if ($fridayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($friday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="שישי" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="fridayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname'];}?></label>                   
              <?php  endforeach;  ?>               
          </td>
          <td>
              <?php if ($saturdayfreeDay === true){
-             echo '<label for="holiday" style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
+             echo '<label  style="color:MediumAquaMarine"><input type="checkbox" name="worker_name[]" id="holiday" value="חופש"> חופש</label>';
              }?>
              <?php
              foreach ($saturday_evening as $shift):?>
              <?php if($shift['job'] == "אחמש"){?>
              <input type="hidden" value="שבת" name="day[]">
              <input type="hidden" value="ערב" name="time[]">
-             <br><label><input type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
+             <br><label><input class="saturdayEveManager" type="checkbox" name="worker_name[]" value="<?php echo $shift['fullname'];?>">
              <?php echo $shift['fullname'];}?></label>
              <?php  endforeach;  ?>
          </td>
@@ -924,25 +973,141 @@
 </main>
 
 <script>
+     var times = {};
+      function hi(){
+//    var times = {};
+    var countChecked = function() {
+//    var times = {};
+////
+    var n = $( '.'+ this.className + ':checked' ).length;
+    times[this.className] = n;
+            console.log(times);
+////            alert( n + (n === 1 ? " is" : " are") + " checked!" );
+        };
+        countChecked();
+    $( "input[type=checkbox]" ).on( "click", countChecked );
+//    
+////    var h = "2";
+    }
+//    
     
-    $(function(){
+    
+    
+//
+//    var countChecked = function() {
+//        var n = $( '.'+ this.className + ':checked' ).length;
+//            console.log(n);
+//            alert( n + (n === 1 ? " is" : " are") + " checked!" );
+//        };
+//        countChecked();
+//    $( "input[type=checkbox]" ).on( "click", countChecked );
+//function hi(){    
+//var profile_viewer_uid = "2";
+//$.ajax({
+//  url: "<?php echo site_url(); ?>" + "/Shifts/manageShifts.php",
+//  type: 'post',
+//  data: { 'profile_viewer_uid': profile_viewer_uid },
+//  success: function(){
+//      alert("hi");
+//  };
+//});
+//};
 
-    var requiredCheckboxes = $(':checkbox[required]');
 
-    requiredCheckboxes.change(function(){
 
-        if(requiredCheckboxes.is(':checked')) {
-            requiredCheckboxes.removeAttr('required');
-        }
 
-        else {
-            requiredCheckboxes.attr('required', 'required');
-        }
-    });
 
-});
+
+//      document.getElementsByClassName(e).removeAttribute("disabled");
+      
+//      document.getElementsByClassName(e).removeAttribute("disabled");
+//        var inputs = document.getElementsByClassName(e);
+//        for(var i = 0; i < inputs.length; i++) {
+//            inputs[i].disabled = false;
+//            }
+//        }
+         
+//         function countChecked(e){
+            
+           
+        
+    
+//    $(function(){
+//
+//    var requiredCheckboxes = $(':checkbox[required]');
+//
+//    requiredCheckboxes.change(function(){
+//
+//        if(requiredCheckboxes.is(':checked')) {
+//            requiredCheckboxes.removeAttr('required');
+//        }
+//
+//        else {
+//            requiredCheckboxes.attr('required', 'required');
+//        }
+//    });
+//
+//});
 //    if($('div.checkbox-group.required :checkbox:checked').length > 0){
 //        alert("hi");
 //    }
 //    
+//$('div .checkbox').click(function () { 
+//    var checked = $('input:checkbox:checked').length;;
+//    alert ("checked");
+//}
+
+// Count ALL checked boxes.
+//console.log($(":checked").length);
+
+// Count checkboxes for a set of given classes.
+//console.log($(".sundayMorWaiter", ".sundayMorBar", ".sundayMorHost", ".sundayMorManager", 
+//".mondayMorWaiter", ".mondayMorHost", ".mondayMorManager", ".tuesdayMorWaiter", ".tuesdayMorBar", 
+//".tuesdayMorHost", ".tuesdayMorManager", ".wednesdayMorWaiter", ".wednesdayMorBar", ".wednesdayMorHost",
+//".wednesdayMorManager", ".thursdayMorWaiter", ".thursdayMorBar", ".thursdayMorHost", ".thursdayMorManager",
+//".fridayMorWaiter", ".fridayMorBar", ".fridayMorHost", ".fridayMorManager", ".saturdayMorWaiter", ".saturdayMorBar",
+//".saturdayMorHost", ".saturdayMorManager", ".sundayEveWaiter", ".sundayEveBar", ".sundayEveHost", ".sundayEveManager",
+//".mondayEveWaiter", ".mondayEveHost", ".mondayEveManager", ".tuesdayEveWaiter", ".tuesdayEveBar", 
+//".tuesdayEveHost", ".tuesdayEveManager", ".wednesdayEveWaiter", ".wednesdayEveBar", ".wednesdayEveHost",
+//".wednesdayEveManager", ".thursdayEveWaiter", ".thursdayEveBar", ".thursdayEveHost", ".thursdayEveManager",
+//".fridayEveWaiter", ".fridayEveBar", ".fridayEveHost", ".fridayEveManager", ".saturdayEveWaiter", ".saturdayEveBar",
+//".saturdayEveHost", ".saturdayEveManager").filter(":checked").length);
+
+
+
+// Or given as array
+//function c(){
+//var targets = [".sundayMorWaiter", ".sundayMorBar", ".sundayMorHost", ".sundayMorManager", 
+//".mondayMorWaiter", ".mondayMorBar", ".mondayMorHost", ".mondayMorManager", ".tuesdayMorWaiter", ".tuesdayMorBar", 
+//".tuesdayMorHost", ".tuesdayMorManager", ".wednesdayMorWaiter", ".wednesdayMorBar", ".wednesdayMorHost", 
+//".wednesdayMorManager", ".thursdayMorWaiter", ".thursdayMorBar", ".thursdayMorHost", ".thursdayMorManager",
+//".fridayMorWaiter", ".fridayMorBar", ".fridayMorHost", ".fridayMorManager", ".saturdayMorWaiter", ".saturdayMorBar",
+//".saturdayMorHost", ".saturdayMorManager", ".sundayEveWaiter", ".sundayEveBar", ".sundayEveHost", ".sundayEveManager",
+//".mondayEveWaiter", ".mondayEveHost", ".mondayEveManager", ".tuesdayEveWaiter", ".tuesdayEveBar", 
+//".tuesdayEveHost", ".tuesdayEveManager", ".wednesdayEveWaiter", ".wednesdayEveBar", ".wednesdayEveHost",
+//".wednesdayEveManager", ".thursdayEveWaiter", ".thursdayEveBar", ".thursdayEveHost", ".thursdayEveManager",
+//".fridayEveWaiter", ".fridayEveBar", ".fridayEveHost", ".fridayEveManager", ".saturdayEveWaiter", ".saturdayEveBar",
+//".saturdayEveHost", ".saturdayEveManager"];
+//console.log($(targets.join(",")).filter(":checked").length);
+//
+//console.log($(".tuesdayMorBar:checked").length);
+//var t = $(".tuesdayMorBar:checked").length;
+
+//for(var i; i<targets.length(); i++){
+//    
+//}
+//var handleCheckboxes = (cls) => {
+//  var n = $(".${cls}:checked").length;
+//  console.log('${n} of class ${cls} ${n === 1 ? "is" : "are"} checked!');
+//};
+//targets.forEach(handleCheckboxes);
+
+
+ 
+
+
+// or without the dot
+//targets = ["one", "two", "three", "four"];
+//console.log($(targets.map(x => `.${x}`).join(",")).filter(":checked").length);
 </script>
+

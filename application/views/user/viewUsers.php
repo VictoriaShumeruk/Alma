@@ -1,6 +1,6 @@
 <main>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/userStyle.css"/>
-<div class="container">
+<div class="container-{breakpoint}">
     
     <?php if($this->session->flashdata('error')){?>
     <div class="alert alert-danger">
@@ -16,7 +16,7 @@
 <div class="row">
     <?php foreach ($workers as $worker):
         echo '<div class="card col">';
-        echo '<h1>'.$worker['fullname'].'</h1>';
+        echo '<h2>'.$worker['fullname'].'</h2>';
         echo '<p><label> תעודת זהות: </label> '.$worker['id'];
         echo '<p><label> סטטוס: </label> '.$worker['role'];
         echo '<p><label> תפקיד: </label> '.$worker['job'];
@@ -42,7 +42,7 @@
     
 <div class="row" id="edit_row">    
 <?php foreach ($workers as $worker):?>
-    <div class="card" id="edit_card"> 
+    <div class="card edit_card"> 
     <?php echo form_open('User/edit'."/".$worker['id']); ?>   
        
     <p><label>שם מלא</label><input type="text" id="fullname" name="fullname" value="<?php echo $worker['fullname'];?>"></p> 
@@ -79,7 +79,7 @@
 
     <p>
         <button type="submit" class="open-button">עדכן</button>
-        <a href="<?php echo base_url() . '/User/delete_user/'.$worker['id'];?>" class="open-button" onclick=" return confirm('האם אתה בטוח שברצונך למחוק?')"> מחק</a>
+        <a href="<?php echo base_url() . '/User/delete_user/'.$worker['id'];?>"><button class="open-button" onclick=" return confirm('האם אתה בטוח שברצונך למחוק?')"> מחק</button></a>
     </p>
 </div>
     

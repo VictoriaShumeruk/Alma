@@ -540,24 +540,6 @@
         </td>
     </tr>
 </table>
-
-    
-   
-<!--    <?php var_dump($shifts_border);?>
-<?php echo form_open('Shifts/update_shifts');?>
-    <?php for( $i=0; $i<14; $i++ ){?>
-    <p><label>שם מלא</label><input type="text" name="worker_name[]" value="<?php echo $shifts_border[$i]->worker_name?>"></p> 
-    <p><label>יום</label><input type="text" name="day[]" value="<?php echo $shifts_border[$i]->day?>"></p> 
-    <p><label>שעה</label><input type="text" name="time[]" value="<?php echo $shifts_border[$i]->time?>"></p> 
-    <?php }?>
-    <button type="submit">שלח</button>
-    <a href="<?php echo base_url() . '/Shifts/update_shifts/' ?>" class="button">שלח</a>
-   <?php echo form_close();?>
-    <input type="button" name="submit" value="שלח">-->
-    
-    
-   
-
 </div>
 </main>
 

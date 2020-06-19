@@ -1,5 +1,5 @@
 <main>
-<div class="container">
+<div class="container-{breakpoint}">
     <div class="row">
         <div class="box"><a href="<?php echo site_url().'user/viewUsers'?>">
                עובדים

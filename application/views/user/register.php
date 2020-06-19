@@ -1,6 +1,6 @@
 <main>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/assets/css/formStyle.css"/>
-<div class="container">
+<div class="container-{breakpoint}">
 <div class="form col-md-6">
 <p id="error"><?php
     if (isset($error)) {
